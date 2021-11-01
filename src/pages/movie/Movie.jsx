@@ -1,15 +1,31 @@
-import { Link, useLocation } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import "./movie.css";
 import { Publish } from "@material-ui/icons";
 import { MovieContext } from "../../context/movieContext/MovieContext";
 import { updateMovie } from "../../context/movieContext/apiCalls";
-import { useContext, useState } from "react";
+import { useContext, useState, useEffect } from "react";
+import axios from "../../axios";
 
 export default function Movie() {
-  const location = useLocation();
-  const getMovie = location.movie;
-  const [movie, setMovie] = useState(getMovie);
+  const [movie, setMovie] = useState([]);
   const {dispatch} = useContext(MovieContext);
+  const params = useParams();
+  useEffect(() => {
+    const getMovie = async () => {
+      try {
+        const res = await axios.get("/movies/find/" + params.movieId, {
+          headers: {
+            token:
+              "Bearer " + JSON.parse(localStorage.getItem("user")).accessToken,
+          }
+        });
+        setMovie(res.data);
+      } catch (error) {
+        console.log(error);
+      }
+    }
+    getMovie();
+  },[params])
   const handleChange = (e) => {
     const value = e.target.value;
     setMovie({...movie, [e.target.name]: value});

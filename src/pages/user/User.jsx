@@ -4,21 +4,32 @@ import {
   PermIdentity,
   Publish,
 } from "@material-ui/icons";
-import { Link, useLocation, useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import "./user.css";
 import { UserContext } from "../../context/userContext/UserContext";
 import { updateUser } from "../../context/userContext/apiCalls";
 import { useContext, useState, useEffect } from "react";
+import axios from "../../axios";
 
 export default function User() {
-  // const userId = useParams();
-  // console.log(userId);
-  // useEffect(() => {
-
-  // },[])
-  const location = useLocation();
-  const getUser = location.user;
-  const [user, setUser] = useState(getUser);
+  const [user, setUser] = useState([]);
+  const params = useParams();
+  useEffect(() => {
+    const getUser = async () => {
+      try {
+        const res = await axios.get("/users/find/" + params.userId, {
+          headers: {
+            token:
+              "Bearer " + JSON.parse(localStorage.getItem("user")).accessToken,
+          }
+        });
+        setUser(res.data);
+      } catch (error) {
+        console.log(error);
+      }
+    }
+    getUser();
+  },[params])
   const {dispatch} = useContext(UserContext);
   const handleChange = (e) => {
     const value = e.target.value;
@@ -28,6 +39,7 @@ export default function User() {
     e.preventDefault();
     updateUser(user._id, dispatch, user);
     alert("Edit successfully");
+    window.location.reload(false);
   }
    return (
     <div className="user">

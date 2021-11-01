@@ -27,7 +27,7 @@ export default function UserList() {
         if (user._id === trans.userID) {
           const getU = async () => {
             try {
-              await axios.put("users/" + user._id, {
+              await axios.put("/users/" + user._id, {
                 headers: {
                   token:
                     "Bearer " + JSON.parse(localStorage.getItem("user")).accessToken,
@@ -89,7 +89,8 @@ export default function UserList() {
 
   return (
     <div className="userList">
-      <DataGrid id={Math.random()}
+      <DataGrid
+        id={Math.random()}
         rows={users}
         disableSelectionOnClick
         columns={columns}

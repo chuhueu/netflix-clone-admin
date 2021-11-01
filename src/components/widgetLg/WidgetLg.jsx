@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import axios from "axios";
+import axios from "../../axios";
 import "./widgetLg.css";
 
 export default function WidgetLg() {
@@ -20,13 +20,6 @@ export default function WidgetLg() {
     }
     getNewTransactions();
   }, []);
-  // useEffect(() => {
-  //   let sum = 0;
-  //   newTransactions.map((transaction) => {
-  //     sum += transaction.amount;
-  //   })
-  //   console.log(sum);
-  // })
   return (
     <div className="widgetLg">
       <h3 className="widgetLgTitle">Latest transactions</h3>
