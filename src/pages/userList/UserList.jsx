@@ -58,7 +58,7 @@ export default function UserList() {
       renderCell: (params) => {
         return (
           <div className="userListUser">
-            <img className="userListImg" src="https://mir-s3-cdn-cf.behance.net/project_modules/disp/bf6e4a33850498.56ba69ac3064f.png" alt="" />
+            <img className="userListImg" src={params.row.profilePic} alt={params.row.username} />
             {params.row.username}
           </div>
         );

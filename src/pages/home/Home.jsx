@@ -37,7 +37,7 @@ export default function Home() {
         const statsList = res.data.sort(function (a,b){
           return a._id - b._id;
         });
-        statsList.map((item) =>{
+        statsList.forEach((item) =>{
           setUserStats((prev) => [
             ...prev,
             {name: MONTHS[item._id - 1], "New User": item.total},
