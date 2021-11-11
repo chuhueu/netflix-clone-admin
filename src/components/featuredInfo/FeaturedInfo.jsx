@@ -46,7 +46,7 @@ export default function FeaturedInfo() {
         const res = await axios.get("transaction/stats", {
           headers: {
             token: "Bearer " + JSON.parse(localStorage.getItem("user")).accessToken,
-          },
+          }
         });
         const statsList = res.data.sort(function (a,b){
           return a._id - b._id;
@@ -63,7 +63,6 @@ export default function FeaturedInfo() {
     }
     getStatsTransaction();
   }, [MONTHS])
-  console.log(monthTrans);
   useEffect(() => {
     let sum = 0;
     newTransactions.forEach((transaction) => {
@@ -77,31 +76,31 @@ export default function FeaturedInfo() {
         <span className="featuredTitle">Revenue</span>
         <div className="featuredMoneyContainer">
           <span className="featuredMoney">${total}.00</span>
-          <span className="featuredMoneyRate">
+          {/* <span className="featuredMoneyRate">
             -11.4 <ArrowDownward className="featuredIcon negative" />
-          </span>
+          </span> */}
         </div>
-        <span className="featuredSub">Compared to last month</span>
+        {/* <span className="featuredSub">Compared to last month</span> */}
       </div>
       <div className="featuredItem">
         <span className="featuredTitle">{MONTHS[date]}</span>
         <div className="featuredMoneyContainer">
           <span className="featuredMoney">${monthTrans[monthTrans.length-1].amount}.00</span>
-          <span className="featuredMoneyRate">
+          {/* <span className="featuredMoneyRate">
             -1.4 <ArrowDownward className="featuredIcon negative" />
-          </span>
+          </span> */}
         </div>
-        <span className="featuredSub">Compared to last month</span>
+        {/* <span className="featuredSub">Compared to last month</span> */}
       </div>
       <div className="featuredItem">
         <span className="featuredTitle">{MONTHS[date-1]}</span>
         <div className="featuredMoneyContainer">
           <span className="featuredMoney">${total - monthTrans[monthTrans.length-1].amount}.00</span>
-          <span className="featuredMoneyRate">
+          {/* <span className="featuredMoneyRate">
             +2.4 <ArrowUpward className="featuredIcon" />
-          </span>
+          </span> */}
         </div>
-        <span className="featuredSub">Compared to last month</span>
+        {/* <span className="featuredSub">Compared to last month</span> */}
       </div>
     </div>
   );
