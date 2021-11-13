@@ -13,12 +13,7 @@ export default function Movie() {
   useEffect(() => {
     const getMovie = async () => {
       try {
-        const res = await axios.get("/movies/find/" + params.movieId, {
-          headers: {
-            token:
-              "Bearer " + JSON.parse(localStorage.getItem("user")).accessToken,
-          }
-        });
+        const res = await axios.get("/movies/find/" + params.movieId);
         setMovie(res.data);
       } catch (error) {
         console.log(error);
